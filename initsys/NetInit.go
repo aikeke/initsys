@@ -75,7 +75,12 @@ func NetInit(eth string, ip string) string {
 		destwriter.WriteString("NETMASK=255.255.0.0\n" + "IPADDR=" + ip + "\n" + "GATEWAY=172." + area + ".255.254\n")
 	}
 	destwriter.Flush()
-	return "fail"
+	err = os.Remove(filepath + "_bak")
+	if err != nil {
+		fmt.Println(err)
+		return "failed"
+	}
+	return "success"
 
 }
 
